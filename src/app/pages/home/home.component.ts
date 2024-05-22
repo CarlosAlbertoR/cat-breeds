@@ -3,13 +3,19 @@ import { Component, OnInit } from '@angular/core';
 import { CatService } from '../../service/cat.service';
 import { CatBreed } from '../../models';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { CatFilterComponent } from '../../components/cat-filter/cat-filter.component';
+import { CatCardComponent } from '../../components/cat-card/cat-card.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, InfiniteScrollModule],
+  imports: [
+    CatCardComponent,
+    CatFilterComponent,
+    CommonModule,
+    InfiniteScrollModule,
+  ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
   breeds: CatBreed[] = [];
@@ -39,7 +45,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  trackByFn(index: number, item: any): any {
+  trackByFn(index: number, item: CatBreed): string {
     return item.id; // Use unique identifier of each item
   }
 }

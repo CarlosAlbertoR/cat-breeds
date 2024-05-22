@@ -6,4 +6,12 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/home/home.component').then((c) => c.HomeComponent),
   },
+  {
+    path: 'breed/:id',
+    loadComponent: () =>
+      import('./pages/breed-detail/breed-detail.component').then(
+        (c) => c.BreedDetailComponent
+      ),
+  },
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

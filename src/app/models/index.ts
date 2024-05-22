@@ -16,6 +16,7 @@ export interface CatBreed {
   health_issues: number;
   hypoallergenic: number;
   id: string;
+  image_url: string;
   indoor: number;
   intelligence: number;
   lap: number;
