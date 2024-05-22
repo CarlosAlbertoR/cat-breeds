@@ -2,6 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.4.
 
+## Demo
+
+You can see a live demo of the project [here](https://cat-breeds-ivory.vercel.app/).
+
 ## Installation
 
 1. Clone the repository to your local machine using `git clone https://github.com/CarlosAlbertoR/cat-breeds.git`.
