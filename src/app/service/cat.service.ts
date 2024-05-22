@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CatBreed, CatImage } from '../models';
 import { Observable, forkJoin, map, mergeMap, of } from 'rxjs';
@@ -11,17 +11,25 @@ export class CatService {
 
   constructor(private http: HttpClient) {}
 
-  getCatBreeds(page: number): Observable<CatBreed[]> {
-    return this.http
-      .get<CatBreed[]>(`${this.baseURL}/breeds?page=${page}&limit=10`)
-      .pipe(
-        mergeMap((breeds: CatBreed[]) => {
-          const breedRequests = breeds.map((breed) =>
-            this.assignImageToBreed(breed)
-          );
-          return forkJoin(breedRequests);
-        })
-      );
+  getCatBreeds(page: number, searchTerm: string = ''): Observable<CatBreed[]> {
+    console.log('searchTerm', searchTerm);
+    let apiUrl = `${this.baseURL}/breeds`;
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('limit', '10');
+    if (searchTerm) {
+      apiUrl = `${apiUrl}/search`;
+      params = params.set('q', searchTerm).set('attach_image', '1');
+    }
+
+    return this.http.get<CatBreed[]>(apiUrl, { params }).pipe(
+      mergeMap((breeds: CatBreed[]) => {
+        const breedRequests = breeds.map((breed) =>
+          this.assignImageToBreed(breed)
+        );
+        return forkJoin(breedRequests);
+      })
+    );
   }
 
   getCatBreed(breedId: string): Observable<CatBreed> {

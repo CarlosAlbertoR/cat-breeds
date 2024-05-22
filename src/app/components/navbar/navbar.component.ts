@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-cat-filter',
+  selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule],
-  template: `<p>cat-filter works!</p>`,
-  styleUrl: './cat-filter.component.scss',
+  imports: [CommonModule, RouterModule],
+  templateUrl: './navbar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CatFilterComponent {}
+export class NavbarComponent {}
